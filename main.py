@@ -1,5 +1,5 @@
 import pygame
-from constants import *
+from constants import SCREEN_WIDTH, SCREEN_HEIGHT
 from player import Player
 
 
@@ -10,15 +10,21 @@ def main():
     clock = pygame.time.Clock()
     dt = 0
 
-    player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+    updatable = pygame.sprite.Group()
+    drawable  = pygame.sprite.Group()
+    Player.containers = (updatable, drawable)
+
+    player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)    
 
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
         screen.fill("black")
-        player.update(dt)
-        player.draw(screen)
+        for item in updatable:
+            item.update(dt)
+        for item in drawable:    
+            item.draw(screen)
         pygame.display.flip()
         dt = clock.tick(60) / 1000
 
