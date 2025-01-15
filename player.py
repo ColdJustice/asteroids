@@ -5,8 +5,6 @@ from constants import PLAYER_RADIUS, PLAYER_SPEED, PLAYER_TURN_SPEED
 class Player(CircleShape):
     def __init__(self, x, y):
         super().__init__(x, y, PLAYER_RADIUS)
-        self.x = x
-        self.y = y
         self.rotation = 0
 
     def triangle(self):
